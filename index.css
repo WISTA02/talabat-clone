@@ -64,3 +64,16 @@ body{
 .menu-item a:hover{
   background: rgb(214, 12, 12);
 }
+
+.register{
+  display: block;
+  font-size: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 8px 30px;
+  margin: 20px 0;
+
+}
+
+.register a:hover{
+  background:yellow;
+}

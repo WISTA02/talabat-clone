@@ -7,6 +7,7 @@ const DataCollection=require("./lib/data-collection");
 const mealModel=require("./meal");
 const orderModel=require("./order");
 const restModel=require("./resturant");
+const driverModel=require("./drivers")
 // const association=require("./x");
 // association();
 // const models = require('./models.js');
@@ -30,6 +31,8 @@ const orderCollection=new DataCollection(orderTable);
 const mealTable=mealModel(sequelize, DataTypes);
 const foodCollection=new DataCollection(mealTable);
 
+const driverTable=driverModel(sequelize, DataTypes);
+
 
 restModel
 const restTable=restModel(sequelize, DataTypes);
@@ -47,11 +50,15 @@ mealTable.belongsTo(restTable);
 restTable.hasMany(orderTable);
 orderTable.belongsTo(restTable);
 
+driverTable.hasMany(orderTable);
+orderTable.belongsTo(driverTable);
+
 module.exports = {
   db: sequelize,
   users: userTable,
   orderCollection:orderCollection,
   foodCollection:foodCollection,
   mealTable:mealTable,
-  orderTable:orderTable
+  orderTable:orderTable,
+  driverTable:driverTable
 };

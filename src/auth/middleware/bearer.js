@@ -1,22 +1,22 @@
 'use strict';
 
-const { users } = require('../models/index.js');
+const {users} = require("../models/index");
 
-module.exports = async (req, res, next) => {
-
-  try {
-console.log("1234567890");
-    if (!req.headers.authorization) { next('Invalid Login') }
-
-    const token = req.headers.authorization.split(' ').pop();
-    const validUser = await users.authenticateToken(token);
-
-    req.user = validUser;
-    req.token = validUser.token;
-    next();
-
-  } catch (e) {
-   
-    res.status(403).send('Invalid Login');
+async function bearer(req, res, next) {
+  if (req.headers.authorization) {
+      console.log(req.headers.authorization);
+      // Bearer eyJhbGciOiJIUzI1NiIsInR5cCIIkpXVCJ9.eyJ1c2VybmFtZSI6InNoaWhhYiIsImlhdCI6MTY1NTA0ODcxMX0.ZEiWN5JiWGvGFr4s3Q6NRLGMHahoTOV3OkiXLfJTvhk
+      const bearerToken = req.headers.authorization.split(" ")[1];
+      users.authenticateBearer(bearerToken)
+          .then((userData) => {
+              req.user = userData;
+              next();
+          })
+          .catch(() => {
+              res.status(403);
+              res.send("Invalid Signin");
+          })
   }
 }
+
+module.exports = bearer;

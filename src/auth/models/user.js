@@ -2,6 +2,7 @@
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const SECRET = process.env.API_SECRET || "tasneemo";
 const users = (sequelize, DataTypes) => {
   const model = sequelize.define("users", {
     username: {
@@ -15,6 +16,13 @@ const users = (sequelize, DataTypes) => {
     },
     token: {
       type: DataTypes.VIRTUAL,
+      get() {
+        return jwt.sign({ username: this.username }, SECRET);
+      },
+      set(tokenObj) {
+        let token = jwt.sign(tokenObj, SECRET);
+        return token;
+      }
     },
     role: {
       type: DataTypes.ENUM("admin", "user"),
@@ -40,34 +48,29 @@ const users = (sequelize, DataTypes) => {
   };
 
   model.authenticateBasic = async function (username, password) {
+    console.log(username, password);
     const user = await this.findOne({ where: { username: username } });
-console.log("after find one");
+    console.log(user);
+
     const valid = await bcrypt.compare(password, user.password);
-console.log("compare");
-console.log(valid);
-    if (valid) {
+    if (!valid)
     
-      let newToken = jwt.sign({ username: user.username }, process.env.SECRET
-        );
-      user.token = newToken;
-      return user;
-    }
-    throw new Error("Invalid User");
+    { 
+  console.log("hi");
+        return user; }
+    throw new Error('Invalid User');
   };
 
-  model.authenticateToken = async function (token) {
+  model.authenticateBearer = async function (token) {
     try {
-      const parsedToken = jwt.verify(token, process.env.SECRET || "samah");
+      const parsedToken = jwt.verify(token, SECRET);
       const user = this.findOne({ where: { username: parsedToken.username } });
-      if (user) {
-        return user;
-      }
+      if (user) { return user; }
       throw new Error("User Not Found");
     } catch (e) {
-      throw new Error(e.message);
+      throw new Error(e.message)
     }
   };
- 
   return model;
 };
 

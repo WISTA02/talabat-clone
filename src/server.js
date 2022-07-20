@@ -10,6 +10,8 @@ const errorHandler = require('./error-handlers/500.js');
 const notFound = require('./error-handlers/404.js');
 const signInRouter=require("./routes/signInRouter");
 const signUpRouter=require("./routes/signUpRouter");
+const secretRouter=require("./routes/secretRouter");
+const getUsersRouter=require("./routes/allUsersRouter");
 const resturantRouter = require("./routes/resturantRouter");
 // const authRoutes = require('./auth/router/index.js');
 // const foodRouter=require("../src/auth/router/meal");
@@ -30,6 +32,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(signUpRouter);
 app.use(signInRouter);
+app.use(secretRouter);
+app.use(getUsersRouter);
 app.use(resturantRouter);
 
 // Routes

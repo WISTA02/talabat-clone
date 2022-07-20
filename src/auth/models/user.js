@@ -41,13 +41,14 @@ const users = (sequelize, DataTypes) => {
 
   model.authenticateBasic = async function (username, password) {
     const user = await this.findOne({ where: { username: username } });
-
+console.log("after find one");
     const valid = await bcrypt.compare(password, user.password);
-
+console.log("compare");
+console.log(valid);
     if (valid) {
-      let newToken = jwt.sign({ username: user.username }, process.env.SECRET, {
-        expiresIn: "15m",
-      });
+    
+      let newToken = jwt.sign({ username: user.username }, process.env.SECRET
+        );
       user.token = newToken;
       return user;
     }

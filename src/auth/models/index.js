@@ -29,7 +29,7 @@ const orderTable=orderModel(sequelize, DataTypes);
 const orderCollection=new DataCollection(orderTable);
 // 
 const mealTable=mealModel(sequelize, DataTypes);
-const foodCollection=new DataCollection(mealTable);
+const mealsCollection=new DataCollection(mealTable);
 
 const driverTable=driverModel(sequelize, DataTypes);
 
@@ -38,27 +38,25 @@ restModel
 const restTable=restModel(sequelize, DataTypes);
 const restCollection=new DataCollection(restTable);
 
-userTable.hasMany(orderTable);
-orderTable.belongsTo(userTable);
+userTable.hasMany(orderTable); //user  many order
+orderTable.belongsTo(userTable); // order one user
 
-orderTable.hasMany(mealTable);
-mealTable.belongsTo(orderTable);
+orderTable.hasMany(mealTable); // order many meals
+mealTable.belongsTo(orderTable); // meals one order
 
-restTable.hasMany(mealTable);
-mealTable.belongsTo(restTable);
+restTable.hasMany(mealTable); // rest many meal
+mealTable.belongsTo(restTable); // meal one rest
 
-restTable.hasMany(orderTable);
-orderTable.belongsTo(restTable);
+restTable.hasMany(orderTable); // rest many order
+orderTable.belongsTo(restTable); // order one rest
 
-driverTable.hasMany(orderTable);
-orderTable.belongsTo(driverTable);
+driverTable.hasMany(orderTable); //driver many order
+orderTable.belongsTo(driverTable); // order one driver
 
 module.exports = {
   db: sequelize,
   users: userTable,
   orderCollection:orderCollection,
-  foodCollection:foodCollection,
-  mealTable:mealTable,
-  orderTable:orderTable,
-  driverTable:driverTable
+  mealsCollection: mealsCollection,
+  restCollection: restCollection,
 };

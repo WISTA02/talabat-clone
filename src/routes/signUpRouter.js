@@ -1,13 +1,13 @@
 'use strict';
 const express = require('express');
 const signUpRouter=express.Router();
-const {Users}=require('../auth/models/index');
+const {users}=require('../auth/models/index');
 
-console.log(Users);
+console.log(users);
 
 signUpRouter.post('/signup', async (req,res,next) =>{
   try {
-    let userRecord = await Users.create(req.body);
+    let userRecord = await users.create(req.body);
     const output = {
       user: userRecord,
       token: userRecord.token

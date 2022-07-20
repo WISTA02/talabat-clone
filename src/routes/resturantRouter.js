@@ -12,6 +12,8 @@ resturantRouter.post('/resturant', bearer, acl('create'), handleCreate);
 resturantRouter.put('/resturant/:id', bearer, acl('update'), handleUpdate);
 resturantRouter.delete('/resturant/:id', bearer, acl('delete'), handleDelete);
 
+
+
 async function handleGetAll(req, res) {
     let allRecords = await req.model.get();
     res.status(200).json(allRecords);

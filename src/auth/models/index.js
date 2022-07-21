@@ -42,29 +42,32 @@ const basketCollection=new DataCollection(basketTable);
 const restTable=restModel(sequelize, DataTypes);
 const restCollection=new DataCollection(restTable);
 
-userTable.hasMany(orderTable); //user  many order
-orderTable.belongsTo(userTable); // order one user
+userTable.hasMany(basketTable); //user  many order
+basketTable.belongsTo(userTable); // order one user
 
-mealTable.hasMany(orderTable); // order many meals
-orderTable.belongsTo(mealTable); // meals one order
+// mealTable.hasMany(orderTable); // order many meals
+// orderTable.belongsTo(mealTable); // meals one order
 
 restTable.hasMany(mealTable); // rest many meal
 mealTable.belongsTo(restTable); // meal one rest
 
-restTable.hasMany(orderTable); // rest many order
-orderTable.belongsTo(restTable); // order one rest
+restTable.hasMany(basketTable); //ok
+basketTable.belongsTo(restTable); // order one rest
 
-driverTable.hasMany(orderTable); //driver many order
-orderTable.belongsTo(driverTable); // order one driver
+driverTable.hasMany(basketTable); //ok
+basketTable.belongsTo(driverTable); // order one driver
 
-userTable.hasMany(basketTable); 
+userTable.hasMany(basketTable); //ok
 basketTable.belongsTo(userTable); 
 
-basketTable.hasMany(mealTable);
-mealTable.belongsTo(basketTable);
+mealTable.hasMany(orderTable);//ok
+orderTable.belongsTo(mealTable);
 
-mealTable.hasOne(basketTable);
-basketTable.belongsTo(mealTable);
+userTable.hasMany(orderTable);//ok
+orderTable.belongsTo(userTable);
+
+basketTable.hasOne(orderTable);
+orderTable.belongsTo(basketTable);
 
 module.exports = {
   db: sequelize,

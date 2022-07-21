@@ -34,8 +34,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(signUpRouter);
 app.use(signInRouter);
 app.use(secretRouter);
-app.use(getUsersRouter);
-app.use(routerServer);
+// app.use(getUsersRouter);
+// app.use(routerServer);
 // app.use(resturantRouter);
 
 

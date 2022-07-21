@@ -1,0 +1,37 @@
+GET http://localhost:3001/
+
+
+
+###
+POST http://localhost:3001/signup
+Content-Type: application/json
+{
+    "username": "tasneem",
+    "password": "123",
+
+}
+
+
+
+###
+POST http://localhost:3001/signin
+Content-Type: application/json
+Authorization: 
+{
+    "username": "tam",
+    "password": "1",
+    "role": "admin"
+}
+
+###
+POST http://localhost:3001/signin
+Content-Type: application/json
+Authorization: 
+
+{
+   "name": "kfc",
+   "type": "fast food",
+   "restaurant_area": "amman",
+   "ratings": "5",
+   "delivery_fee": "2 JD"
+}

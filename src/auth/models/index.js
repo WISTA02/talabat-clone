@@ -34,7 +34,7 @@ const mealsCollection=new DataCollection(mealTable);
 const driverTable=driverModel(sequelize, DataTypes);
 
 
-restModel
+// restModel
 const restTable=restModel(sequelize, DataTypes);
 const restCollection=new DataCollection(restTable);
 

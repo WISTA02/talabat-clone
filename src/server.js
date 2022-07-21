@@ -19,8 +19,9 @@ const getUsersRouter=require("./routes/allUsersRouter");
 // const foodRouter=require("../src/auth/router/meal");
 // const orderRouter=require("../src/auth/router/order");
 const mealRouter = require('./routes/mealRouter');
-const routerServer = require("./routes/router-server")
-// const resturantRouter = require("./routes/resturantRouter");
+// const routerServer = require("./routes/router-server")
+const resturantRouter = require("./routes/resturantRouter");
+
 
 
 
@@ -40,7 +41,9 @@ app.use(signInRouter);
 app.use(secretRouter);
 app.use(getUsersRouter);
 app.use(mealRouter);
-app.use(routerServer);
+// app.use(routerServer);
+app.use(resturantRouter);
+
 
 
 // Routes

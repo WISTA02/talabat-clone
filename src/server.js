@@ -16,6 +16,7 @@ const resturantRouter = require("./routes/resturantRouter");
 // const authRoutes = require('./auth/router/index.js');
 // const foodRouter=require("../src/auth/router/meal");
 // const orderRouter=require("../src/auth/router/order");
+const mealRouter = require('./routes/mealRouter');
 
 
 // Prepare the express app
@@ -35,6 +36,7 @@ app.use(signInRouter);
 app.use(secretRouter);
 app.use(getUsersRouter);
 app.use(resturantRouter);
+app.use(mealRouter);
 
 // Routes
 // app.use(orderRouter);

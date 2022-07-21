@@ -57,6 +57,6 @@ module.exports = {
   db: sequelize,
   users: userTable,
   orderCollection:orderCollection,
-  mealsCollection: mealsCollection,
+  meal: mealsCollection,
   restCollection: restCollection,
 };

@@ -58,11 +58,6 @@ module.exports = {
   db: sequelize,
   users: userTable,
   orderCollection:orderCollection,
-  foodCollection:foodCollection,
-  mealTable:mealTable,
-  orderTable:orderTable,
-  driverTable:driverTable,
-  driverCollection:driverCollection,
   mealsCollection: mealsCollection,
   restCollection: restCollection,
 };

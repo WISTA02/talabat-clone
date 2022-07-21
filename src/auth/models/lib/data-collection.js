@@ -9,9 +9,8 @@ class collection{
           let newRecord = await this.model.create(obj);
           return newRecord;
       } catch (e) {
-          console.log(e);
-          console.error("error in creating a new record in model ", this.model)
-  
+        console.log(e);
+    throw new Error("invalid creating new record");
       }
   }
   /////////////read//////////////////////////

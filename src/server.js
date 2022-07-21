@@ -8,6 +8,9 @@ const morgan = require('morgan');
 // Esoteric Resources
 const errorHandler = require('./error-handlers/500.js');
 const notFound = require('./error-handlers/404.js');
+// const authRoutes = require('../src/routes/index');
+// const foodRouter=require("../src/auth/router/meal");
+const driverRouter=require("../src/routes/driver");
 const signInRouter=require("./routes/signInRouter");
 const signUpRouter=require("./routes/signUpRouter");
 const secretRouter=require("./routes/secretRouter");
@@ -36,6 +39,10 @@ app.use(routerServer);
 // app.use(resturantRouter);
 
 
+// Routes
+app.use(driverRouter);
+// app.use(foodRouter);
+// app.use(authRoutes)
 
 
 // Catchalls

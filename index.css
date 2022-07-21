@@ -16,6 +16,8 @@ body{
   font-family: 'Open Sans', sans-serif;
   height: 100%;
 }
+
+
 .container{
   display: grid;
   grid-template-columns: 250px 1fr 300px;
@@ -77,3 +79,10 @@ body{
 .register a:hover{
   background:yellow;
 }
+
+/* .overview p{
+  font-size: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: indianred;
+  margin: 0;
+} */

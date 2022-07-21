@@ -11,6 +11,13 @@ const notFound = require('./error-handlers/404.js');
 // const authRoutes = require('../src/routes/index');
 // const foodRouter=require("../src/auth/router/meal");
 const driverRouter=require("../src/routes/driver");
+const signInRouter=require("./routes/signInRouter");
+const signUpRouter=require("./routes/signUpRouter");
+const secretRouter=require("./routes/secretRouter");
+const getUsersRouter=require("./routes/allUsersRouter");
+const routerServer = require("./routes/router-server")
+// const resturantRouter = require("./routes/resturantRouter");
+
 
 
 // Prepare the express app
@@ -22,9 +29,15 @@ app.get("/",(req,res)=>{
 // App Level MW
 app.use(cors());
 app.use(morgan('dev'));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(signUpRouter);
+app.use(signInRouter);
+app.use(secretRouter);
+app.use(getUsersRouter);
+app.use(routerServer);
+// app.use(resturantRouter);
+
 
 // Routes
 app.use(driverRouter);

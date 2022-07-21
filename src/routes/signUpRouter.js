@@ -1,21 +1,27 @@
 'use strict';
 const express = require('express');
+require("dotenv").config();
+const { users } = require('../auth/models/index');
+const bcrypt=require("bcrypt");
 const signUpRouter=express.Router();
-const {Users}=require('../auth/models/index');
 
-console.log(Users);
 
 signUpRouter.post('/signup', async (req,res,next) =>{
   try {
-    let userRecord = await Users.create(req.body);
+  req.body.password = await bcrypt.hash(req.body.password, 10);
+  const userRecord = await users.create(req.body);
+  // users.role = req.body.role;
     const output = {
       user: userRecord,
-      token: userRecord.token
+      role:userRecord.role,
+      action:userRecord.action
     };
     res.status(201).json(output);
   } catch (e) {
-    next(e.message);
+
+    next(e);
   }
 });
 
-module.exports= signUpRouter;
+
+module.exports = signUpRouter;

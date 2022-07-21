@@ -8,9 +8,9 @@ const morgan = require('morgan');
 // Esoteric Resources
 const errorHandler = require('./error-handlers/500.js');
 const notFound = require('./error-handlers/404.js');
-// const authRoutes = require('./auth/router/index.js');
+// const authRoutes = require('../src/routes/index');
 // const foodRouter=require("../src/auth/router/meal");
-// const orderRouter=require("../src/auth/router/order");
+const driverRouter=require("../src/routes/driver");
 
 
 // Prepare the express app
@@ -27,7 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-// app.use(orderRouter);
+app.use(driverRouter);
 // app.use(foodRouter);
 // app.use(authRoutes)
 

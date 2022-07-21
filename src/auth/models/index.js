@@ -32,6 +32,7 @@ const mealTable=mealModel(sequelize, DataTypes);
 const foodCollection=new DataCollection(mealTable);
 
 const driverTable=driverModel(sequelize, DataTypes);
+const driverCollection=new DataCollection(driverTable);
 
 
 restModel
@@ -60,5 +61,6 @@ module.exports = {
   foodCollection:foodCollection,
   mealTable:mealTable,
   orderTable:orderTable,
-  driverTable:driverTable
+  driverTable:driverTable,
+  driverCollection:driverCollection
 };

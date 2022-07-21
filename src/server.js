@@ -15,8 +15,8 @@ const signInRouter=require("./routes/signInRouter");
 const signUpRouter=require("./routes/signUpRouter");
 const secretRouter=require("./routes/secretRouter");
 const getUsersRouter=require("./routes/allUsersRouter");
-const routerServer = require("./routes/router-server")
-// const resturantRouter = require("./routes/resturantRouter");
+// const routerServer = require("./routes/router-server")
+const resturantRouter = require("./routes/resturantRouter");
 
 
 
@@ -35,8 +35,8 @@ app.use(signUpRouter);
 app.use(signInRouter);
 app.use(secretRouter);
 app.use(getUsersRouter);
-app.use(routerServer);
-// app.use(resturantRouter);
+// app.use(routerServer);
+app.use(resturantRouter);
 
 
 // Routes

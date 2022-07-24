@@ -1,14 +1,15 @@
 "use strict";
 
 const express = require("express");
-
+const acl = require('../auth/middleware/acl');
+const bearer = require("../auth/middleware/bearer")
 
 const { orderCollection } = require('../auth/models/index')
 
 const orderRouter = express.Router();
 orderRouter.get('/order', handleGetAll);
 orderRouter.get('/order/:id', handleGetOne);
-orderRouter.post('/order', handleCreate);
+orderRouter.post('/order', bearer, acl('create'), handleCreate);
 orderRouter.put('/order/:id', handleUpdate);
 orderRouter.delete('/order/:id', handleDelete);
 

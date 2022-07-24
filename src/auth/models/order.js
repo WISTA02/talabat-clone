@@ -4,9 +4,14 @@
 
 'use strict';
 
+
+const sequelize = require("sequelize");
+
 const orderDetailsModel = (sequelize, DataTypes) => sequelize.define('orders', {
-    num_of_items:{type:DataTypes.INTEGER},
+    all_items:{type:DataTypes.STRING},
+    status:{type:DataTypes.STRING},
     total_price:{type:DataTypes.FLOAT(11)},
+    driver_ID:{type:DataTypes.INTEGER}
 },{timestamps:false});
 
 

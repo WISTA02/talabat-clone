@@ -8,23 +8,13 @@ sequelize.define('resturants', {
      type: DataTypes.STRING, 
      required: true },
 
-  type: {
-    type: DataTypes.STRING, 
-    required: true 
-  },
+ 
   restaurant_area:{
     type: DataTypes.STRING, 
     required: true 
   },
-ratings:{
-  type: DataTypes.STRING, 
-  required: true 
-},
-delivery_fee:{
-  type: DataTypes.STRING, 
-  required: true 
-}
 
+order_path:{type: DataTypes.INTEGER,}
 },
 {timestamps:false});
 

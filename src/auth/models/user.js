@@ -19,7 +19,7 @@ const users = (sequelize, DataTypes) => {
 
     },
     role: {
-      type: DataTypes.ENUM("admin", "user"),
+      type: DataTypes.ENUM("admin", "user","driver","resturant_owner"),
       defaultValue: "user",
     },
     actions: {
@@ -29,10 +29,16 @@ const users = (sequelize, DataTypes) => {
         const acl = {
           user: ["read"],
           admin: ["read", "create", "update", "delete"],
+          driver:["read",  "update"],
+          resturant_owner:["read",  "update"]
         };
         return acl[this.role];
       },
     },
+  email:{type:DataTypes.STRING},
+  phone:{type: DataTypes.BIGINT(11), required: true},
+  car_model: { type: DataTypes.STRING, required: true },
+  operating_city:{type:DataTypes.STRING,required: true,unique:true}
   },{timestamps:false});
 
   model.beforeCreate = async function (password) {

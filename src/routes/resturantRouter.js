@@ -1,50 +1,55 @@
 "use strict";
 
 const express = require("express");
+const { json } = require("express/lib/response");
+const { restCollection } = require("../auth/models/index");
 const resturantRouter =express.Router();
-const acl =require('../auth/middleware/acl');
-const bearer = require("../auth/middleware/bearer")
 
-
-resturantRouter.get('/resturant', bearer,acl('read'),handleGetAll);
-resturantRouter.get('/resturant/:id', bearer, acl('read'), handleGetOne);
-resturantRouter.post('/resturant', bearer, acl('create'), handleCreate);
-resturantRouter.put('/resturant/:id', bearer, acl('update'), handleUpdate);
-resturantRouter.delete('/resturant/:id', bearer, acl('delete'), handleDelete);
-
+resturantRouter.get('/resturant',handleGetAll);
+resturantRouter.get('/resturant/:id', handleGetOne);
+resturantRouter.post('/resturant',handleCreate);
+resturantRouter.put('/resturant/:id', handleUpdate);
+resturantRouter.delete('/resturant/:id', handleDelete);
 
 
 async function handleGetAll(req, res) {
-    let allRecords = await req.model.get();
-    res.status(200).json(allRecords);
+    let resturants = await restCollection.read();
+    res.status(200).json(resturants);
+  }
+  
+  async function handleGetOne(req, res) {
+    const id = parseInt(req.params.id);
+    let recored = await restCollection.read(id);
+    res.status(200).json(recored);
   }
 
-  async function handleGetOne(req, res) {
-    const id = req.params.id;
-    let theRecord = await req.model.get(id)
-    res.status(200).json(theRecord);
+
+async function handleCreate(req, res) {
+    try {
+      let newResturant = req.body;
+      let newRecored = await restCollection.create(newResturant );
+       res.status(201).json(newRecored);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error.message);
+    }
   }
-  
-  async function handleCreate(req, res) {
-    let obj = req.body;
-    let newRecord = await req.model.create(obj);
-    res.status(201).json(newRecord);
-  }
-  
+
   async function handleUpdate(req, res) {
-    const id = req.params.id;
-    const obj = req.body;
-    let updatedRecord = await req.model.update(id, obj)
-    res.status(201).json(updatedRecord);
+    let id = parseInt(req.params.id);
+    let newRecored = req.body;
+    let foundValue = await restCollection.read(id);
+    if (foundValue) {
+      let updatedRecord = await foundValue.update(newRecored);
+      res.status(201).json(updatedRecord);
+    }
   }
   
   async function handleDelete(req, res) {
-    let id = req.params.id;
-    let deletedRecord = await req.model.delete(id);
+    let id = parseInt(req.params.id);
+    let deletedRecord = await restCollection.delete(id);
     res.status(204).json(deletedRecord);
   }
   
-
-
-
+ 
 module.exports = resturantRouter;

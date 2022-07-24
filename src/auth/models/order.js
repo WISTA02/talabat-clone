@@ -1,11 +1,13 @@
 
 
+
+
 'use strict';
 
-const orderModel = (sequelize, DataTypes) => sequelize.define('orders', {
-  foods: { type: DataTypes.STRING, required: true },
-  total:{type:DataTypes.FLOAT(11)},
+const orderDetailsModel = (sequelize, DataTypes) => sequelize.define('orders', {
+    num_of_items:{type:DataTypes.INTEGER},
+    total_price:{type:DataTypes.FLOAT(11)},
 },{timestamps:false});
 
 
-module.exports = orderModel;
+module.exports = orderDetailsModel;

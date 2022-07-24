@@ -16,13 +16,7 @@ const users = (sequelize, DataTypes) => {
     },
     token: {
       type: DataTypes.VIRTUAL,
-      get() {
-        return jwt.sign({ username: this.username }, SECRET);
-      },
-      set(tokenObj) {
-        let token = jwt.sign(tokenObj, SECRET);
-        return token;
-      }
+
     },
     role: {
       type: DataTypes.ENUM("admin", "user"),
@@ -42,23 +36,24 @@ const users = (sequelize, DataTypes) => {
   },{timestamps:false});
 
   model.beforeCreate = async function (password) {
-    let hashedPass = await bcrypt.hash(password, 10);
+    let hashedPass = await bcrypt.hash(password, 50);
 
     return hashedPass;
   };
 
   model.authenticateBasic = async function (username, password) {
-    console.log(username, password);
-    const user = await this.findOne({ where: { username: username } });
-    console.log(user);
+    const user = await this.findOne({ where: { username: username }, });
 
     const valid = await bcrypt.compare(password, user.password);
-    if (!valid)
-    
-    { 
-  console.log("hi");
-        return user; }
-    throw new Error('Invalid User');
+
+    if (valid) {
+
+      let newToken = jwt.sign({ username: user.username },process.env.SECRET);
+        // console.log('********', newToken);
+        user.token = newToken;
+      return user;
+    }
+    throw new Error("Invalid User");
   };
 
   model.authenticateBearer = async function (token) {

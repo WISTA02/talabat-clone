@@ -19,7 +19,7 @@ const users = (sequelize, DataTypes) => {
 
     },
     role: {
-      type: DataTypes.ENUM("admin", "user","driver","resturant_owner"),
+      type: DataTypes.ENUM("admin", "user", "driver", "resturant_owner"),
       defaultValue: "user",
     },
     actions: {
@@ -29,17 +29,17 @@ const users = (sequelize, DataTypes) => {
         const acl = {
           user: ["read"],
           admin: ["read", "create", "update", "delete"],
-          driver:["read",  "update"],
-          resturant_owner:["read",  "update"]
+          driver: ["read", "update"],
+          resturant_owner: ["read", "update"]
         };
         return acl[this.role];
       },
     },
-  email:{type:DataTypes.STRING},
-  phone:{type: DataTypes.BIGINT(11), required: true},
-  car_model: { type: DataTypes.STRING, required: true },
-  operating_city:{type:DataTypes.STRING,required: true,unique:true}
-  },{timestamps:false});
+    email: { type: DataTypes.STRING },
+    phone: { type: DataTypes.INTEGER, required: true },
+    car_model: { type: DataTypes.STRING, required: true },
+    operating_city: { type: DataTypes.STRING, required: true, unique: true }
+  }, { timestamps: false });
 
   model.beforeCreate = async function (password) {
     let hashedPass = await bcrypt.hash(password, 50);
@@ -54,9 +54,9 @@ const users = (sequelize, DataTypes) => {
 
     if (valid) {
 
-      let newToken = jwt.sign({ username: user.username },process.env.SECRET);
-        // console.log('********', newToken);
-        user.token = newToken;
+      let newToken = jwt.sign({ username: user.username }, process.env.SECRET);
+      // console.log('********', newToken);
+      user.token = newToken;
       return user;
     }
     throw new Error("Invalid User");

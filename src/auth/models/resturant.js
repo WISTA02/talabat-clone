@@ -12,7 +12,7 @@ const restModel = (sequelize, DataTypes) =>
 
       rating: { type: DataTypes.STRING, required: true },
 
-      delivery_fee: { type: DataTypes.FLOAT(11), required: true },
+      delivery_fee: { type: DataTypes.FLOAT(11, 10)},
     },
     { timestamps: false }
   );

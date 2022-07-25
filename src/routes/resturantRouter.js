@@ -24,9 +24,20 @@ async function handleGetAll(req, res) {
   }
 
 
+
+
 async function handleCreate(req, res) {
     try {
-      let newResturant = req.body;
+      let newResturant = {
+      name: req.body.name,
+      type: req.body.type,
+      order_path: req.body.order_path,
+      rating: req.body.rating,
+      delivery_fee: req.body.delivery_fee,
+  
+      };
+      // newResturant.operating_city= "amman";
+      // newResturant.owner_ID = 1234;
       let newRecored = await restCollection.create(newResturant );
        res.status(201).json(newRecored);
     } catch (error) {

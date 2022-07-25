@@ -35,3 +35,15 @@ Authorization:
    "ratings": "5",
    "delivery_fee": "2 JD"
 }
+
+
+
+// {
+   "name": "kfc",
+   "type": "fast food",
+   "order_path": 001,
+   "rating": "***",
+   "delivery_fee": 2,
+   "operating_city": "amman",
+   "owner_ID": 1234
+# }

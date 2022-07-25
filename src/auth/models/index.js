@@ -31,26 +31,32 @@ const orderCollection=new DataCollection(orderTable);
 const mealTable=mealModel(sequelize, DataTypes);
 const mealsCollection=new DataCollection(mealTable);
 
-
-
-// restModel
 const restTable=restModel(sequelize, DataTypes);
 const restCollection=new DataCollection(restTable);
+
+////////////relations/////////////////////////////////////
 
 restTable.hasMany(mealTable); // rest many meal
 mealTable.belongsTo(restTable); // meal one rest
 
 userTable.hasMany(restTable,{
-
+  foreignKey: "operating_city",
   sourceKey: "operating_city"
 });
 
 restTable.belongsTo(userTable,{
-  foreignKey: "OC",
+  foreignKey: "owner_ID",
 }); 
 
 restTable.hasMany(orderTable); //ok
 orderTable.belongsTo(restTable); // order one rest
+
+
+userTable.hasMany(orderTable,{
+
+  foreignKey:"clinet_ID"
+});
+orderTable.belongsTo(userTable,{foreignKey:"driver_ID"})
 // sequelize.sync({alter:true}).then(()=>{}).catch((e)=>console.log(e)) 
 module.exports = {
   db: sequelize,

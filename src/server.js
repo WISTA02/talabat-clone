@@ -19,7 +19,7 @@ const orderRouter = require("./routes/orderRouter");
 // const orderRouter=require("../src/auth/router/order");
 const mealRouter = require('./routes/mealRouter');
 // const routerServer = require("./routes/router-server")
-const resturantRouter = require("./routes/resturantRouter");
+// const resturantRouter = require("./routes/resturantRouter");
 
 
 
@@ -47,7 +47,7 @@ app.use(mealRouter);
 app.use(resturantRouter);
 app.use(orderRouter);
 // Routes
-app.use(driverRouter);
+// app.use(driverRouter);
 // app.use(foodRouter);
 // app.use(authRoutes)
 

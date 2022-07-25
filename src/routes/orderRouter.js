@@ -1,18 +1,19 @@
 "use strict";
 
 const express = require("express");
-const acl = require('../auth/middleware/acl');
+
 const bearer = require("../auth/middleware/bearer")
 
-const { orderCollection } = require('../auth/models/index')
+const { orderCollection } = require('../auth/models/index');
+const sequelize = require("sequelize");
 
 const orderRouter = express.Router();
 orderRouter.get('/order', handleGetAll);
 orderRouter.get('/order/:id', handleGetOne);
-orderRouter.post('/order', handleCreate);
-// orderRouter.post('/order', bearer, acl('create'), handleCreate);
+orderRouter.post('/order', bearer, handleCreate);
 orderRouter.put('/order/:id', handleUpdate);
 orderRouter.delete('/order/:id', handleDelete);
+
 
 
 async function handleGetAll(req, res) {
@@ -27,7 +28,14 @@ async function handleGetOne(req, res) {
 }
 
 async function handleCreate(req, res) {
-    let newOrder = req.body;
+    console.log("//////////////////", req.user);
+    let newOrder = {
+        all_items: req.body.all_items,
+        status: req.body.status,
+        total_price: req.body.total_price,
+        driver_ID: req.body.driver_ID,
+        userId: req.user.id
+    };
     let order = await orderCollection.create(newOrder);
     res.status(201).json(order);
 }

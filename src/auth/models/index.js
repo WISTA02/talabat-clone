@@ -56,7 +56,10 @@ userTable.hasMany(orderTable,{
 
   foreignKey:"clinet_ID"
 });
-orderTable.belongsTo(userTable,{foreignKey:"driver_ID"})
+orderTable.belongsTo(userTable,{foreignKey:"driver_ID"});
+
+// sequelize.dropAllSchemas;
+console.log("*********************************",sequelize.showAllSchemas());
 // sequelize.sync({alter:true}).then(()=>{}).catch((e)=>console.log(e)) 
 module.exports = {
   db: sequelize,

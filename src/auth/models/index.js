@@ -52,11 +52,8 @@ restTable.hasMany(orderTable); //ok
 orderTable.belongsTo(restTable); // order one rest
 
 
-userTable.hasMany(orderTable,{
-
-  foreignKey:"clinet_ID"
-});
-orderTable.belongsTo(userTable,{foreignKey:"driver_ID"});
+userTable.hasMany(orderTable);
+orderTable.belongsTo(userTable);
 
 // sequelize.dropAllSchemas;
 console.log("*********************************",sequelize.showAllSchemas());

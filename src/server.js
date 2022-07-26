@@ -22,6 +22,7 @@ const mealRouter = require('./routes/mealRouter');
 // const resturantRouter = require("./routes/resturantRouter");
 const driverRouter=require("./routes/driverRouter")
 const searchRouter=require("./routes/searchRouter")
+const locationRouter=require("./routes/locationRouter")
 
 
 
@@ -53,6 +54,7 @@ app.use(driverRouter);
 // app.use(authRoutes)
 
 app.use(searchRouter);
+app.use(locationRouter)
 
 
 // Catchalls

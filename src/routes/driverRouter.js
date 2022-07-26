@@ -19,6 +19,7 @@ async function getAllOrder(req, res) {
     orders = await orderTable.findAll({
       where: { status: "Restaurant-is-accepting" },
     });
+
     res.status(200).json(orders);
 }
 let x=0;
@@ -35,9 +36,18 @@ async function updateStatues(req, res) {
       { driver_ID: req.user.id, status: s },
       { where: { id: orderID } }
     );
+    // findRest();
     let order = await orderTable.findOne({ where: { id: orderID } });
-// let restLocation =findRest(order.resturantId);
+// let restLocation =findRest(2);
 // let clinetLocation =
+// console.log(restLocation);
+// let message;
+// message=`i will got to the resturant at location ${restLocation}`;
+// let response ={
+//   message:message,
+//   order:order
+
+// }
     res.status(201).json(order);
 x++;
   } catch (error) {
@@ -51,8 +61,8 @@ let res= await restTable.findOne({where:{id:id}});
 return res.location;
 }
 
-async function findClient(id){
-  let client = await users.findOne({where:{id:id}});
-  return client.location;
-}
+// async function findClient(id){
+//   let client = await users.findOne({where:{id:id}});
+//   return client.location;
+// }
 module.exports = driverRouter;

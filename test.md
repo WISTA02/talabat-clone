@@ -18,3 +18,7 @@ search
      "resturant":"geet",
 "meal":"pizza"
 }
+
+
+location
+{"location":"{city:amman,oo:pp}"}

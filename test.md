@@ -12,3 +12,9 @@ signup
     "password":"123",
     "role":"driver"
 }
+
+search
+{
+     "resturant":"geet",
+"meal":"pizza"
+}

@@ -40,9 +40,6 @@ restTable.hasMany(mealTable); // rest many meal
 mealTable.belongsTo(restTable); // meal one rest
 
 userTable.hasMany(restTable);
- 
-
-
 restTable.belongsTo(userTable);
 
 restTable.hasMany(orderTable); //ok
@@ -52,9 +49,7 @@ orderTable.belongsTo(restTable); // order one rest
 userTable.hasMany(orderTable);
 orderTable.belongsTo(userTable);
 
-// sequelize.dropAllSchemas;
-console.log("*********************************", sequelize.showAllSchemas());
-// sequelize.sync({alter:true}).then(()=>{}).catch((e)=>console.log(e)) 
+
 module.exports = {
   db: sequelize,
   users: userTable,

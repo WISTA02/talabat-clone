@@ -4,12 +4,13 @@ const express = require("express");
 const { json } = require("express/lib/response");
 const { restCollection } = require("../auth/models/index");
 const resturantRouter =express.Router();
+const bearer = require("../auth/middleware/bearer")
 
-resturantRouter.get('/resturant',handleGetAll);
-resturantRouter.get('/resturant/:id', handleGetOne);
-resturantRouter.post('/resturant',handleCreate);
-resturantRouter.put('/resturant/:id', handleUpdate);
-resturantRouter.delete('/resturant/:id', handleDelete);
+resturantRouter.get('/resturant',bearer,handleGetAll);
+resturantRouter.get('/resturant/:id',bearer, handleGetOne);
+resturantRouter.post('/resturant',bearer,handleCreate);
+resturantRouter.put('/resturant/:id',bearer,handleUpdate);
+resturantRouter.delete('/resturant/:id',bearer, handleDelete);
 
 
 async function handleGetAll(req, res) {
@@ -24,8 +25,6 @@ async function handleGetAll(req, res) {
   }
 
 
-
-
 async function handleCreate(req, res) {
     try {
       let newResturant = {
@@ -34,10 +33,12 @@ async function handleCreate(req, res) {
       order_path: req.body.order_path,
       rating: req.body.rating,
       delivery_fee: req.body.delivery_fee,
-  
+      location: req.body.location,
+     
       };
-      newResturant.operating_city= "amman";
-      newResturant.owner_ID = 1234;
+
+      let user_Id = req.user.id;
+      newResturant.userId= user_Id;
       let newRecored = await restCollection.create(newResturant );
        res.status(201).json(newRecored);
     } catch (error) {

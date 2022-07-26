@@ -36,8 +36,8 @@ async function handleCreate(req, res) {
       delivery_fee: req.body.delivery_fee,
   
       };
-      // newResturant.operating_city= "amman";
-      // newResturant.owner_ID = 1234;
+      newResturant.operating_city= "amman";
+      newResturant.owner_ID = 1234;
       let newRecored = await restCollection.create(newResturant );
        res.status(201).json(newRecored);
     } catch (error) {

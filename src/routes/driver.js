@@ -3,8 +3,9 @@
 const express = require("express");
 const { json } = require("express/lib/response");
 const bearer = require("../auth/middleware/bearer");
-const acl = require("../auth/middleware/acl");
-const { orderTable } = require("../auth/models/index");
+
+const { orderTable,restTable,users } = require("../auth/models/index");
+
 const driverRouter = express.Router();
 driverRouter.get("/driver", bearer, getAllOrder);
 driverRouter.post("/driver", bearer, updateStatues);
@@ -17,7 +18,7 @@ async function getAllOrder(req, res) {
 
   if (req.user.role === "driver"||req.user.role === "Admin") {
     orders = await orderTable.findAll({
-      where: { status: "restaurant-is-accepting" },
+      where: { status: "Restaurant-is-accepting" },
     });
     res.status(200).json(orders);
   } else {
@@ -40,6 +41,8 @@ async function updateStatues(req, res) {
       { where: { id: orderID } }
     );
     let order = await orderTable.findOne({ where: { id: orderID } });
+// let restLocation =findRest(order.resturantId);
+// let clinetLocation =
     res.status(201).json(order);
 x++;
   } catch (error) {
@@ -51,5 +54,13 @@ x++;
     res.status(500).send("Access Denied");
   }
 }
+async function findRest(id){
+let res= await restTable.findOne({where:{id:id}});
+return res.location;
+}
 
+async function findClient(id){
+  let client = await users.findOne({where:{id:id}});
+  return client.location;
+}
 module.exports = driverRouter;

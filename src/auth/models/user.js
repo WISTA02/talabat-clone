@@ -22,23 +22,11 @@ const users = (sequelize, DataTypes) => {
       type: DataTypes.ENUM("admin", "user","driver","resturant_owner"),
       defaultValue: "user",
     },
-    actions: {
-      type: DataTypes.VIRTUAL,
-      get() {
-        //acl >>> access control list
-        const acl = {
-          user: ["read"],
-          admin: ["read", "create", "update", "delete"],
-          driver:["read",  "update"],
-          resturant_owner:["read",  "update"]
-        };
-        return acl[this.role];
-      },
-    },
+    
   email:{type:DataTypes.STRING},
-  phone:{type: DataTypes.BIGINT(11), required: true},
-  car_model: { type: DataTypes.STRING, required: true },
-  operating_city:{type:DataTypes.STRING,required: true,unique:true}
+  phone:{type: DataTypes.INTEGER, required: true},
+  car_model: { type: DataTypes.STRING },
+  operating_city:{type:DataTypes.STRING,required: true}
   },{timestamps:false});
 
   model.beforeCreate = async function (password) {

@@ -66,4 +66,6 @@ module.exports = {
   mealsCollection: mealsCollection,
   restCollection: restCollection,
 
+  restTable:restTable
+
 };

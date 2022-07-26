@@ -28,34 +28,15 @@ POST http://localhost:3001/signin
 Content-Type: application/json
 Authorization: 
 
-{
-   "name": "kfc",
-   "type": "fast food",
-   "restaurant_area": "amman",
-   "ratings": "5",
-   "delivery_fee": "2 JD"
-}
-
-
 
 // {
-   "name": "kfc",
+ 
+  "name": "kfc",
    "type": "fast food",
-   "order_path": 001,
+   "order_path":111,
    "rating": "***",
-   "delivery_fee": 2,
-   "operating_city": "amman",
-   "owner_ID": 1234
+   "delivery_fee":"2 jd"
+
 # }
 
 
-
-
-
-# {
-   "name":"kfc",
-   "type":"fast food",
-   "order_path":1,
-   "rating":"***",
-   "delivery_fee":"2 jd"
-#    }

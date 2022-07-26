@@ -43,9 +43,7 @@ userTable.hasMany(restTable);
  
 
 
-restTable.belongsTo(userTable, {
-  foreignKey: "owner_ID",
-});
+restTable.belongsTo(userTable);
 
 restTable.hasMany(orderTable); //ok
 orderTable.belongsTo(restTable); // order one rest

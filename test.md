@@ -8,6 +8,7 @@ driver
 
 signup
 {
-    "username":"x",
-    "password":"123"
+ "username":"p",
+    "password":"123",
+    "role":"driver"
 }

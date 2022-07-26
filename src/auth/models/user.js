@@ -26,7 +26,7 @@ const users = (sequelize, DataTypes) => {
   email:{type:DataTypes.STRING},
   phone:{type: DataTypes.INTEGER, required: true},
   car_model: { type: DataTypes.STRING },
-  operating_city:{type:DataTypes.STRING,required: true}
+  location:{type:DataTypes.JSONB}
   },{timestamps:false});
 
   model.beforeCreate = async function (password) {

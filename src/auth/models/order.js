@@ -8,7 +8,7 @@
 const sequelize = require("sequelize");
 
 const orderDetailsModel = (sequelize, DataTypes) => sequelize.define('orders', {
-    all_items:{type:DataTypes.STRING},
+    all_items:{type:DataTypes.ARRAY(DataTypes.JSONB)},
     status:{type:DataTypes.ENUM("Restaurant-is-accepting",
         "Restaurant-is-preparing",
         "Driver-accepted",

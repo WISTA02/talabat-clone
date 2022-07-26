@@ -19,15 +19,17 @@ const users = (sequelize, DataTypes) => {
 
     },
     role: {
-      type: DataTypes.ENUM("admin", "user","driver","resturant_owner"),
+      type: DataTypes.ENUM("admin", "user", "driver", "resturant_owner"),
       defaultValue: "user",
     },
+
     
   email:{type:DataTypes.STRING},
   phone:{type: DataTypes.INTEGER, required: true},
   car_model: { type: DataTypes.STRING },
   location:{type:DataTypes.JSONB}
   },{timestamps:false});
+
 
   model.beforeCreate = async function (password) {
     let hashedPass = await bcrypt.hash(password, 50);
@@ -42,9 +44,9 @@ const users = (sequelize, DataTypes) => {
 
     if (valid) {
 
-      let newToken = jwt.sign({ username: user.username },process.env.SECRET);
-        // console.log('********', newToken);
-        user.token = newToken;
+      let newToken = jwt.sign({ username: user.username }, process.env.SECRET);
+      // console.log('********', newToken);
+      user.token = newToken;
       return user;
     }
     throw new Error("Invalid User");

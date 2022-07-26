@@ -39,10 +39,9 @@ const restCollection = new DataCollection(restTable);
 restTable.hasMany(mealTable); // rest many meal
 mealTable.belongsTo(restTable); // meal one rest
 
-userTable.hasMany(restTable, {
-  foreignKey: "operating_city",
-  sourceKey: "operating_city"
-});
+userTable.hasMany(restTable);
+ 
+
 
 restTable.belongsTo(userTable, {
   foreignKey: "owner_ID",

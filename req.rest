@@ -47,3 +47,15 @@ Authorization:
    "operating_city": "amman",
    "owner_ID": 1234
 # }
+
+
+
+
+
+# {
+   "name":"kfc",
+   "type":"fast food",
+   "order_path":1,
+   "rating":"***",
+   "delivery_fee":"2 jd"
+#    }

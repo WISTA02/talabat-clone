@@ -11,6 +11,8 @@ const driverRouter = express.Router();
 driverRouter.get("/driver", bearer,role('driver'), getAllOrder);
 driverRouter.put("/driver", bearer,role('driver'), updateStatues);
 
+
+var restLocation;
 ///////////select *//////////////////
 async function getAllOrder(req, res) {
   let orders;
@@ -36,11 +38,11 @@ async function updateStatues(req, res) {
       { driver_ID: req.user.id, status: s },
       { where: { id: orderID } }
     );
-    // findRest();
     let order = await orderTable.findOne({ where: { id: orderID } });
-// let restLocation =findRest(2);
+console.log(order.resturantId);
+  // let resturant= await restTable.findOne({where:{id:2}});
+  // restLocation=resturant.location;
 // let clinetLocation =
-// console.log(restLocation);
 // let message;
 // message=`i will got to the resturant at location ${restLocation}`;
 // let response ={
@@ -56,13 +58,18 @@ x++;
   }
 
 }
+
+
+/////////////////find function////////////////////////////////
 async function findRest(id){
 let res= await restTable.findOne({where:{id:id}});
-return res.location;
+restLocation=res.location;
+
 }
 
-// async function findClient(id){
-//   let client = await users.findOne({where:{id:id}});
-//   return client.location;
-// }
+async function findClient(id){
+  let client = await users.findOne({where:{id:id}});
+  console.log();
+  return client.location;
+}
 module.exports = driverRouter;

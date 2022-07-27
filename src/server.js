@@ -6,7 +6,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 
 // Esoteric Resources
-const locationRouter = require('./routes/locationRouter');
+
 const errorHandler = require('./error-handlers/500.js');
 const notFound = require('./error-handlers/404.js');
 const signInRouter = require('./routes/signInRouter');
@@ -19,7 +19,7 @@ const searchRouter=require("./routes/searchRouter")
 const locationRouter=require("./routes/locationRouter")
 const mealRouter = require('./routes/mealRouter');
 const restaurantMealRouter = require('./routes/restaurantMealsRouter');
-const driverRouter = require('./routes/driver');
+const driverRouter = require('./routes/driverRouter');
 
 // Prepare the express app
 const app = express();

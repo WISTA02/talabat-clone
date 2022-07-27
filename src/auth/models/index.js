@@ -39,8 +39,6 @@ const restCollection = new DataCollection(restTable);
 restTable.hasMany(mealTable); // rest many meal
 mealTable.belongsTo(restTable); // meal one rest
 
-userTable.hasMany(restTable);
-restTable.belongsTo(userTable);
 
 restTable.hasMany(orderTable); //ok
 orderTable.belongsTo(restTable); // order one rest
@@ -58,7 +56,6 @@ module.exports = {
   orderTable: orderTable,
   mealsCollection: mealsCollection,
   restCollection: restCollection,
-
   restTable:restTable
 
 };

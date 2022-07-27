@@ -3,14 +3,15 @@
 const express = require("express");
 const { json } = require("express/lib/response");
 const { restCollection } = require("../auth/models/index");
-const resturantRouter =express.Router();
-const bearer = require("../auth/middleware/bearer")
+const restaurantRouter =express.Router();
+const bearer = require("../auth/middleware/bearer");
+const role = require("../auth/middleware/role");
 
-resturantRouter.get('/resturant',bearer,handleGetAll);
-resturantRouter.get('/resturant/:id',bearer, handleGetOne);
-resturantRouter.post('/resturant',bearer,handleCreate);
-resturantRouter.put('/resturant/:id',bearer,handleUpdate);
-resturantRouter.delete('/resturant/:id',bearer, handleDelete);
+restaurantRouter.get('/restaurant',bearer,role('user','admin'),handleGetAll);
+restaurantRouter.get('/restaurant/:id',bearer, role('admin'),handleGetOne);
+restaurantRouter.post('/restaurant',bearer,role('admin'),handleCreate);
+restaurantRouter.put('/restaurant/:id',bearer,role('admin'),handleUpdate);
+restaurantRouter.delete('/restaurant/:id',bearer,role('admin'), handleDelete);
 
 
 async function handleGetAll(req, res) {
@@ -64,4 +65,4 @@ async function handleCreate(req, res) {
   }
   
  
-module.exports = resturantRouter;
+module.exports = restaurantRouter;

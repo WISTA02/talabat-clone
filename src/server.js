@@ -12,15 +12,11 @@ const signInRouter = require("./routes/signInRouter");
 const signUpRouter = require("./routes/signUpRouter");
 const secretRouter = require("./routes/secretRouter");
 const getUsersRouter = require("./routes/allUsersRouter");
-const resturantRouter = require("./routes/resturantRouter");
+const restaurantRouter = require("./routes/restaurantRouter");
 const orderRouter = require("./routes/orderRouter");
-// const authRoutes = require('./auth/router/index.js');
-// const foodRouter=require("../src/auth/router/meal");
-// const orderRouter=require("../src/auth/router/order");
 const mealRouter = require('./routes/mealRouter');
-// const routerServer = require("./routes/router-server")
-// const resturantRouter = require("./routes/resturantRouter");
-const driverRouter=require("./routes/driver")
+const driverRouter=require("./routes/driver");
+const locationRouter= require("./routes/locationRouter");
 
 
 
@@ -44,8 +40,9 @@ app.use(secretRouter);
 app.use(getUsersRouter);
 app.use(mealRouter);
 // app.use(routerServer);
-app.use(resturantRouter);
+app.use(restaurantRouter);
 app.use(orderRouter);
+app.use(locationRouter);
 // Routes
 app.use(driverRouter);
 // app.use(foodRouter);

@@ -12,7 +12,9 @@ const restModel = (sequelize, DataTypes) =>
 
       rating: { type: DataTypes.STRING },
 
-      delivery_fee: { type: DataTypes.STRING},
+      delivery_fee: { type: DataTypes.FLOAT(11)},
+
+      ownerId: { type: DataTypes.STRING},
     },
     { timestamps: false }
   );

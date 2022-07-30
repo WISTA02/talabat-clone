@@ -21,6 +21,7 @@ const locationRouter=require("./routes/locationRouter")
 const mealRouter = require('./routes/mealRouter');
 const restaurantMealRouter = require('./routes/restaurantMealsRouter');
 const driverRouter = require('./routes/driverRouter');
+const profitRouter=require("./routes/profitRouter");
 
 
 // Prepare the express app
@@ -51,6 +52,7 @@ app.use(driverRouter);
 app.use(searchRouter);
 app.use(locationRouter);
 app.use(ratingRouter);
+app.use(profitRouter);
 
 
 // Catchalls

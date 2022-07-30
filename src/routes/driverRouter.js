@@ -26,10 +26,11 @@ async function getAllOrder(req, res) {
   res.status(200).json(orders);
 }
 let x = 0;
+let y=0
 ////////////////updateStatues////////////////////
 async function updateStatues(req, res) {
   let s;
-  if (x == 0) s = "Driver-accepted";
+  if (x == 0) {s = "Driver-accepted"};
   if (x == 1) s = "Out-for-delivery";
   if (x >= 2) s = "Delivered";
 
@@ -45,20 +46,24 @@ async function updateStatues(req, res) {
       where: { id: order.resturantId },
     });
     let restLocation = resturant.location;
-    let client = await users.findOne({ where: { id: userId } });
+    let client = await users.findOne({ where: { id: order.userId } });
     let clinetLocation = client.location;
+    console.log(restLocation);
     // let clinetLocation =
-    let message = "Im a driver";
-    if (x == 0)
-      message = `I will go to the resturant at location ${restLocation}`;
-    if (x == 1)
-      messag = `I will go to the client at location ${clinetLocation}`;
+    let message ="";
+    // if(x==0)
+    // message = "Im a driver";
+    // if (x == 1)
+    //   message = `I will go to the resturant at location ${restLocation}`;
+    // if (x >= 2)
+    //   messag = `I will go to the client at location ${clinetLocation}`;
     let response = {
       message: message,
       order: order,
     };
     res.status(201).json(order);
     x++;
+   
   } catch (error) {
     console.log(error);
     res.status(500).send(error.message);

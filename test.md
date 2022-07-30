@@ -10,7 +10,7 @@ signup
 {
  "username":"p",
     "password":"123",
-    "role":"driver"
+    "role":"admin"
 }
 
 search
@@ -21,18 +21,21 @@ search
 
 
 location
-{"location":"{city:amman,oo:pp}"}
+{
+    "location":{"city":"amman"}
+    
+}
 
 
 resturant
 
 {
-   "name": "kkk",
+   "name": "pizza",
    "type": "fast food",
    "order_path": 111,
    "rating": "*",
    "delivery_fee": 2,
-   "location":"{city:irbid}"
+   "location":{"city":"amman"}
 }
 
 meal
@@ -45,4 +48,14 @@ meal
 order
 {
  "all_items":[{"meal-id":1,"quantity":5}]
+}
+
+{
+   "resturant":""
+}
+
+reting
+{
+ "orderId":1,
+ "restRate":9
 }

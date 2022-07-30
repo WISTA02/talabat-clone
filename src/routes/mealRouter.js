@@ -27,6 +27,7 @@ async function handleGetOne(req, res) {
 
 async function handleCreate(req, res) {
   let obj = req.body;
+  obj.resturantId=2;
   let newRecord = await mealsCollection.create(obj);
   res.status(201).json(newRecord);
 }

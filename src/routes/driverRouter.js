@@ -1,24 +1,27 @@
 // const driverRouter =require ("../models/index");
 
-const express = require('express');
-const bearer = require('../auth/middleware/bearer');
-const role = require('../auth/middleware/role');
+const express = require("express");
+const bearer = require("../auth/middleware/bearer");
+const role = require("../auth/middleware/role");
 
-const { orderTable, restTable, users } = require('../auth/models/index');
-
+const { orderTable, restTable, users } = require("../auth/models/index");
+const { Sequelize, DataTypes } = require("sequelize");
+const Op = Sequelize.Op;
 const driverRouter = express.Router();
-driverRouter.get('/driver', bearer, role('driver'), getAllOrder);
-driverRouter.put('/driver', bearer, role('driver'), updateStatues);
+driverRouter.get("/driver", bearer, role("driver"), getAllOrder);
+driverRouter.put("/driver", bearer, role("driver"), updateStatues);
+/** let rest = await restTable.findAll({where:{  name: {
+        [Op.like]: `%${req.body.resturant}%`,
+      }}}) */
 
-
-var restLocation;
-///////////select *//////////////////
+///////////get all order//////////////////
 async function getAllOrder(req, res) {
   let orders;
   x = 0;
   console.log(req.user.role);
+  let client = await users.findAll({ where: { location:{city: req.user.location.city} } });
   orders = await orderTable.findAll({
-    where: { status: 'Restaurant-is-accepting' },
+    where: { [Op.and]: [{ status: "Restaurant-is-accepting" }] },
   });
   res.status(200).json(orders);
 }
@@ -26,9 +29,9 @@ let x = 0;
 ////////////////updateStatues////////////////////
 async function updateStatues(req, res) {
   let s;
-  if (x == 0) s = 'Driver-accepted';
-  if (x == 1) s = 'Out-for-delivery';
-  if (x >= 2) s = 'Delivered';
+  if (x == 0) s = "Driver-accepted";
+  if (x == 1) s = "Out-for-delivery";
+  if (x >= 2) s = "Delivered";
 
   try {
     let orderID = req.body.id;
@@ -37,17 +40,23 @@ async function updateStatues(req, res) {
       { where: { id: orderID } }
     );
     let order = await orderTable.findOne({ where: { id: orderID } });
-console.log(order.resturantId);
-  // let resturant= await restTable.findOne({where:{id:2}});
-  // restLocation=resturant.location;
-// let clinetLocation =
-// let message;
-// message=`i will got to the resturant at location ${restLocation}`;
-// let response ={
-//   message:message,
-//   order:order
 
-// }
+    let resturant = await restTable.findOne({
+      where: { id: order.resturantId },
+    });
+    let restLocation = resturant.location;
+    let client = await users.findOne({ where: { id: userId } });
+    let clinetLocation = client.location;
+    // let clinetLocation =
+    let message = "Im a driver";
+    if (x == 0)
+      message = `I will go to the resturant at location ${restLocation}`;
+    if (x == 1)
+      messag = `I will go to the client at location ${clinetLocation}`;
+    let response = {
+      message: message,
+      order: order,
+    };
     res.status(201).json(order);
     x++;
   } catch (error) {
@@ -61,7 +70,7 @@ async function findRest(id) {
 }
 
 async function findClient(id) {
-  let client = await users.findOne({ where: { id: id } });
+  let client = await users.findAll({ where: { id: id } });
   return client.location;
 }
 module.exports = driverRouter;

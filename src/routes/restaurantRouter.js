@@ -34,7 +34,7 @@ async function handleCreate(req, res) {
       name: req.body.name,
       type: req.body.type,
       order_path: req.body.order_path,
-      rating: req.body.rating,
+      rating: 0,
       delivery_fee: req.body.delivery_fee,
       location: req.body.location,
     };

@@ -16,10 +16,12 @@ const getUsersRouter = require('./routes/allUsersRouter');
 const restaurantRouter = require('./routes/restaurantRouter');
 const orderRouter = require('./routes/orderRouter');
 const searchRouter=require("./routes/searchRouter")
+const ratingRouter = require("./routes/ratingRouter");
 const locationRouter=require("./routes/locationRouter")
 const mealRouter = require('./routes/mealRouter');
 const restaurantMealRouter = require('./routes/restaurantMealsRouter');
 const driverRouter = require('./routes/driverRouter');
+
 
 // Prepare the express app
 const app = express();
@@ -42,12 +44,13 @@ app.use(getUsersRouter);
 app.use(mealRouter);
 app.use(restaurantRouter);
 app.use(orderRouter);
-app.use(locationRouter);
+// app.use(locationRouter);
 // Routes
 app.use(driverRouter);
 
 app.use(searchRouter);
-app.use(locationRouter)
+app.use(locationRouter);
+app.use(ratingRouter);
 
 
 // Catchalls

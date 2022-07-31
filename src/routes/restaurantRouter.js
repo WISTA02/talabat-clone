@@ -34,13 +34,15 @@ async function handleCreate(req, res) {
       name: req.body.name,
       type: req.body.type,
       order_path: req.body.order_path,
-      rating: req.body.rating,
+      rating: 0,
       delivery_fee: req.body.delivery_fee,
       location: req.body.location,
+
     };
 
     let user_Id = req.user.id;
-    newResturant.userId = user_Id;
+    newResturant.userId = 11;
+
     let newRecored = await restCollection.create(newResturant);
     res.status(201).json(newRecored);
   } catch (error) {

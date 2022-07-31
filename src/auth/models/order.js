@@ -1,5 +1,6 @@
 'use strict';
 
+const { BOOLEAN } = require('sequelize');
 const sequelize = require('sequelize');
 
 const orderDetailsModel = (sequelize, DataTypes) =>
@@ -20,6 +21,7 @@ const orderDetailsModel = (sequelize, DataTypes) =>
       },
       total_price: { type: DataTypes.FLOAT(11) },
       driver_ID: { type: DataTypes.INTEGER },
+      rated:{type:DataTypes.BOOLEAN,defaultValue:false}
     },
     { timestamps: false }
   );

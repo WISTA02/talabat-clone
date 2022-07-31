@@ -47,6 +47,7 @@ async function handleCreate(req, res) {
     userId: req.user.id,
     resturantId: restId,
   };
+  console.log(newOrder);
   let order = await orderCollection.create(newOrder);
   res.status(201).json(order);
 }

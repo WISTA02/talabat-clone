@@ -10,11 +10,11 @@ const restModel = (sequelize, DataTypes) =>
 
       order_path: { type: DataTypes.INTEGER },
 
-      rating: { type: DataTypes.STRING },
+      rating: { type: DataTypes.FLOAT(11) ,defaultValue:0.0},
 
-      delivery_fee: { type: DataTypes.FLOAT(11)},
+      delivery_fee: { type: DataTypes.STRING},
 
-      ownerId: { type: DataTypes.STRING},
+      location:{type:DataTypes.JSONB}
     },
     { timestamps: false }
   );

@@ -59,3 +59,12 @@ reting
  "orderId":1,
  "restRate":9
 }
+
+signup regex
+{
+ "username":"samah",
+    "password":"12345678r@",
+    "role":"admin",
+    "email":"sss@yahoo.com",
+    "phone":"0795548262"
+}

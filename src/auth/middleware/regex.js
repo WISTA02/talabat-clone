@@ -9,7 +9,7 @@ module.exports = () => {
     try {
       console.log("yes");
       // user can do action
-      if (validEmail(req.body.email)&&validPhoneNum(req.body.phone)) {
+      if (validEmail(req.body.email)&&validPhoneNum(req.body.phone)&&validPassword(req.body.password)) {
         next();
       } else {
         next('Access Denied');
@@ -27,7 +27,7 @@ function validEmail(email){
   return true;
   else
   throw new Error("Invalid Email");
-  // return false
+ 
 }
 function validPhoneNum(phonNum){
     let regex=/^(079||078||077)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
@@ -35,6 +35,24 @@ function validPhoneNum(phonNum){
   return true;
   else
   throw new Error("Invalid phone number");
-  // return false;
-  }
  
+  }
+ //Minimum eight characters, at least one letter, one number and one special character:
+function validPassword(pass){
+  let regex=/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+if (regex.test(pass))
+return true;
+else
+throw new Error("Invalid Password");
+
+}
+
+//"\"key1\":(\\d+)"
+function validLocation(location){
+  let regex=/^{&\"city\":(\\d+)$}/;
+if (regex.test(location))
+return true;
+else
+throw new Error("Invalid location");
+
+}

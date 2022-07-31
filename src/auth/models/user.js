@@ -25,7 +25,7 @@ const users = (sequelize, DataTypes) => {
       },
 
       email: { type: DataTypes.STRING },
-      phone: { type: DataTypes.INTEGER, required: true },
+      phone: { type: DataTypes.BIGINT, required: true },
       car_model: { type: DataTypes.STRING },
       location: { type: DataTypes.JSONB },
     },

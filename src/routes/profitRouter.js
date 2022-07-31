@@ -13,6 +13,7 @@ profitRouter.get('/profit', bearer, role(["driver","owner"]), handleGetProfit);
 ///////////////////////function
 async function handleGetProfit(req,res){
     let profit=0;
+  let appProfit=0;
     ////////////////////////driver profit
     if (req.user.role == "driver") {
       let orders = await orderTable.findAll({
@@ -24,9 +25,11 @@ async function handleGetProfit(req,res){
           where: { id: element.resturantId },
         });
         profit += rest.delivery_fee * 0.5;
+        appProfit += rest.delivery_fee * 0.5;
       }
-      ///////////////restwrant profit
-    } else if (req.user.rolr == "owner") {
+      res.status(201).json(profit);
+      ///////////////resturant profit
+    } else if (req.user.role == "owner") {
       let rest = await restTable.findOne({ where: { ownerId: req.user.id } });
       let order = await orderTable.findAll({ where: { resturantId: rest.id } });
       for (const element of order) {
@@ -34,10 +37,15 @@ async function handleGetProfit(req,res){
         let rest = await restTable.findOne({
           where: { id: element.resturantId },
         });
-        proft = profit + element.total_price -( rest.delivery_fee * 0.5);
+        proft = profit + element.total_price - rest.delivery_fee ;
+        appProfit=.2*profit;
+        profit=.8*profit;
       }
+      res.status(201).json(profit);
+    }else if (req.user.role == "admin"){
+      res.status(201).json(appProfit);
     }
-    res.status(201).json(profit);
+    
 }
 
 module.exports=profitRouter;
